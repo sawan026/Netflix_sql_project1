@@ -36,10 +36,12 @@ listed_in varchar(150)	,
 description varchar(250)
 )
 
-select * from netflix;
 
--- 10 business problems 
-1. count the number of movies and tv shows 
+
+## 10 business problems 
+### 1. count the number of movies and tv shows 
+
+```sql
 
 select
     type ,
