@@ -1,3 +1,3 @@
 # Netfilx Movies and Tv shows Data Analysis using SQL 
 
-![netflix logo]()
+![netflix logo](https://github.com/sawan026/Netflix_sql_project1/blob/main/Unknown)
