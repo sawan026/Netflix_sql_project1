@@ -37,7 +37,7 @@ duration varchar(15),
 listed_in varchar(150)	,
 description varchar(250)
 )
-
+```
 
 
 ## 10 business problems 
@@ -50,7 +50,7 @@ select
 	count(*) as total_content  
 from netflix
 group by type ;
-
+```
 
 ###2. find the most common rating for movies and tv shows
 ```sql
@@ -65,7 +65,7 @@ from
     rank() over(partition by type order by count(*) desc) as  ranking  
 from netflix 
 group by type , rating ) new_table where ranking = 1;
-
+```
 ###3. list all movie released in a specific year (e.g ,2020)
 ```sql
 
@@ -74,6 +74,7 @@ where
     type = 'Movie'
 	and 
 	release_year = 2020;
+```
 ###4. list top 5 countries with the most content on netflix
 
 ```sql
@@ -84,6 +85,7 @@ from netflix
 group by country
 order by count(show_id) desc 
 limit 5 ;
+```
 
 ###5. identify the longest movie ;
 
@@ -93,6 +95,7 @@ where
     type = 'Movie'
 	and 
 	duration = (select max(duration) from netflix) ;
+```
 
 ###6. find content added in last 5 year
  
@@ -100,12 +103,14 @@ where
 select * from netflix 
 where 
     to_date(date_added , 'month DD,yyyy') >=  current_date - interval '5 years' ;
+```
 
 ###7. find all the movie/tv shows directed by 'rajiv chilaka'!
 ```sql
 
 select * from netflix 
 where director ilike '%rajiv chilaka%' ;
+```
 
 ###8. list all tv shows more than 5 seasons
 
@@ -118,6 +123,7 @@ where
     type = 'tv show'
 	and 
 	split_part(duration,' ',1) ::numeric > 5;
+```
 
 ###9. count the number of content items in each genre
 
@@ -127,6 +133,7 @@ select
 	count(show_id) as total_content
 from netflix
 group by unnest(string_to_array(listed_In, ','));
+```
 
 
 ###10. list all movies that are documentaries
@@ -135,4 +142,5 @@ group by unnest(string_to_array(listed_In, ','));
 select * from netflix 
 where 
     listed_in ilike '%documentaries'
+```
 
