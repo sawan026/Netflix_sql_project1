@@ -51,6 +51,7 @@ select
 from netflix
 group by type ;
 ```
+**objective**
 
 ###2. find the most common rating for movies and tv shows
 ```sql
