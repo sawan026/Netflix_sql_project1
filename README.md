@@ -19,6 +19,8 @@ the data for this project is sourced from the kaggle dataset.
 -**dataset link:** [movies dataset](https://github.com/sawan026/Netflix_sql_project1/blob/main/netflix_titles.csv)
 
 ## schema
+
+```sql
 drop table if exists netflix ;
 create table netflix 
 (
@@ -50,7 +52,8 @@ from netflix
 group by type ;
 
 
-2. find the most common rating for movies and tv shows 
+###2. find the most common rating for movies and tv shows
+```sql
 select 
     type ,
 	rating 
@@ -63,15 +66,17 @@ from
 from netflix 
 group by type , rating ) new_table where ranking = 1;
 
-3. list all movie released in a specific year (e.g ,2020)
+###3. list all movie released in a specific year (e.g ,2020)
+```sql
 
 select * from netflix 
 where
     type = 'Movie'
 	and 
 	release_year = 2020;
-4. list top 5 countries with the most content on netflix 
+###4. list top 5 countries with the most content on netflix
 
+```sql
 select 
     unnest(string_to_array(country, ',')) as new_country,
 	count (show_id) as total_content 
@@ -80,26 +85,31 @@ group by country
 order by count(show_id) desc 
 limit 5 ;
 
-5. identify the longest movie ;
+###5. identify the longest movie ;
 
+```sql
 select * from netflix 
 where  
     type = 'Movie'
 	and 
 	duration = (select max(duration) from netflix) ;
 
-6. find content added in last 5 year 
-
+###6. find content added in last 5 year
+ 
+```sql
 select * from netflix 
 where 
     to_date(date_added , 'month DD,yyyy') >=  current_date - interval '5 years' ;
 
-7. find all the movie/tv shows directed by 'rajiv chilaka'!
+###7. find all the movie/tv shows directed by 'rajiv chilaka'!
+```sql
 
 select * from netflix 
 where director ilike '%rajiv chilaka%' ;
 
-8. list all tv shows more than 5 seasons
+###8. list all tv shows more than 5 seasons
+
+```sql
 
 select 
     *
@@ -109,8 +119,9 @@ where
 	and 
 	split_part(duration,' ',1) ::numeric > 5;
 
-9. count the number of content items in each genre
+###9. count the number of content items in each genre
 
+```sql
 select
 	unnest(string_to_array(listed_In, ',')) as genre,
 	count(show_id) as total_content
@@ -118,8 +129,9 @@ from netflix
 group by unnest(string_to_array(listed_In, ','));
 
 
-10. list all movies that are documentaries
+###10. list all movies that are documentaries
 
+```sql
 select * from netflix 
 where 
     listed_in ilike '%documentaries'
